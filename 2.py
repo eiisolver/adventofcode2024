@@ -4,6 +4,7 @@ def is_safe(levels):
     safe = safe and all(abs(diff) in (1, 2, 3) for diff in diffs)
     return safe
 
+
 reports = [line.split() for line in open("2_input.txt", "r").read().splitlines()]
 nr_safe = 0
 nr_safe_after_dampen = 0
