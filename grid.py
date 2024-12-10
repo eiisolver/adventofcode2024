@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+import functools
 from typing import List
 
 
@@ -8,23 +9,29 @@ class Pos:
     Row/column position in a 2-dimensional grid.
     """
 
+    __slots__ = ("row", "col")
+
     row: int
     col: int
 
     def add(self, pos: "Pos") -> "Pos":
-        return Pos(self.row + pos.row, self.col + pos.col)
+        return Pos.create(self.row + pos.row, self.col + pos.col)
 
     def subtract(self, pos: "Pos") -> "Pos":
-        return Pos(self.row - pos.row, self.col - pos.col)
+        return Pos.create(self.row - pos.row, self.col - pos.col)
 
     def negate(self) -> "Pos":
-        return Pos(-self.row, -self.col)
+        return Pos.create(-self.row, -self.col)
 
     def at(self, lines: List[List]):
         """
         Returns the element at this position.
         """
         return lines[self.row][self.col]
+
+    @functools.cache
+    def create(row, col) -> "Pos":
+        return Pos(row, col)
 
 
 @dataclass
@@ -49,7 +56,7 @@ class Grid:
         """
         for row in range(self.rows):
             for col in range(self.cols):
-                yield Pos(row, col)
+                yield Pos.create(row, col)
 
     def walk(self, start: Pos, delta: Pos, include_start: bool = False):
         """
