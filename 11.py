@@ -1,5 +1,6 @@
 import functools
 
+
 @functools.cache
 def nr_stones_after_blinks(nr: int, blinks: int) -> int:
     if blinks == 0:
@@ -14,8 +15,10 @@ def nr_stones_after_blinks(nr: int, blinks: int) -> int:
         return nr_stones_after_blinks(nr1, blinks - 1) + nr_stones_after_blinks(nr2, blinks - 1)
     return nr_stones_after_blinks(2024 * nr, blinks - 1)
 
+
 def sum_of_stones(numbers: list[int], nr_blinks) -> int:
     return sum(nr_stones_after_blinks(nr, nr_blinks) for nr in numbers)
+
 
 numbers = [int(nr) for nr in open("11_input.txt", "r").read().split()]
 print("Part 1:", sum_of_stones(numbers, 25))

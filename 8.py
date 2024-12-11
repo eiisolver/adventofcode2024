@@ -7,7 +7,7 @@ grid = Grid.create(lines)
 
 # Map from frequency to list of positions.
 all_antennas = defaultdict(list)
-for pos in grid.rows_cols():
+for pos in grid.positions():
     freq = pos.at(lines)
     if freq != ".":
         all_antennas[freq].append(pos)

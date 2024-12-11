@@ -14,8 +14,7 @@ def expand(positions: dict[Pos, int]) -> dict[Pos, int]:
     """
     result = dict()
     for pos in positions:
-        for dir in NESW.DIRS:
-            pos2 = pos.add(dir)
+        for pos2 in pos.neighbours(NESW.DIRS):
             if grid.contains(pos2) and pos2.at(topo_map) == pos.at(topo_map) + 1:
                 result[pos2] = positions[pos] + result.get(pos2, 0)
     return result
@@ -23,7 +22,7 @@ def expand(positions: dict[Pos, int]) -> dict[Pos, int]:
 
 part1 = 0
 part2 = 0
-for pos in grid.rows_cols():
+for pos in grid.positions():
     if pos.at(topo_map) == 0:
         # Potential trail head
         positions = {pos: 1}

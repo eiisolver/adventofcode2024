@@ -28,7 +28,7 @@ def patrol(start_pos: Pos, dir: int) -> Tuple[Dict, Pos]:
 
 
 start_pos = None
-for pos in grid.rows_cols():
+for pos in grid.positions():
     if pos.at(lines) == "^":
         start_pos = pos
 

@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 import functools
-from typing import List
+from typing import Iterator, List
 
 
 @dataclass(frozen=True, eq=True)
@@ -29,6 +29,13 @@ class Pos:
         """
         return lines[self.row][self.col]
 
+    def neighbours(self, dirs: list["Pos"]) -> Iterator["Pos"]:
+        """
+        Generates neighbours of this position.
+        """
+        for dir in dirs:
+            yield self.add(dir)
+
     @functools.cache
     def create(row, col) -> "Pos":
         return Pos(row, col)
@@ -50,9 +57,9 @@ class Grid:
         """
         return 0 <= pos.row < self.rows and 0 <= pos.col < self.cols
 
-    def rows_cols(self):
+    def positions(self) -> Iterator[Pos]:
         """
-        Iterates for all rows/columns, yields Pos objects.
+        Iterates over all positions on the grid, yields Pos objects.
         """
         for row in range(self.rows):
             for col in range(self.cols):
