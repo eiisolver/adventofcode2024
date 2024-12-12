@@ -4,6 +4,7 @@ from typing import Iterator, List
 
 
 @dataclass(frozen=True, eq=True)
+@functools.total_ordering
 class Pos:
     """
     Row/column position in a 2-dimensional grid.
@@ -35,6 +36,14 @@ class Pos:
         """
         for dir in dirs:
             yield self.add(dir)
+
+    def __lt__(self, other):
+        """
+        Sorts on row, then col.
+        """
+        if self.row == other.row:
+            return self.col < other.col
+        return self.row < other.row
 
     @functools.cache
     def create(row, col) -> "Pos":
