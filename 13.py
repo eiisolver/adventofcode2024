@@ -12,6 +12,7 @@ for i in range(0, len(lines), 4):
     prize2 = [t + DELTA for t in prize1]
     prize = [prize1, prize2]
     for part in range(2):
+        # Solve the linear equations, there should be only 1 solution.
         A = np.array([[button_a[0], button_b[0]], [button_a[1], button_b[1]]])
         P = prize[part]
         solution = np.linalg.solve(A, P)
