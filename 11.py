@@ -1,4 +1,5 @@
 import functools
+import time
 
 
 @functools.cache
@@ -21,5 +22,7 @@ def sum_of_stones(numbers: list[int], nr_blinks) -> int:
 
 
 numbers = [int(nr) for nr in open("11_input.txt", "r").read().split()]
+start_time = time.perf_counter()
 print("Part 1:", sum_of_stones(numbers, 25))
 print("Part 2:", sum_of_stones(numbers, 75))
+print("Took", time.perf_counter() - start_time)
