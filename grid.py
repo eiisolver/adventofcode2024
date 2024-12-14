@@ -24,6 +24,12 @@ class Pos:
     def negate(self) -> "Pos":
         return Pos.create(-self.row, -self.col)
 
+    def multiply(self, factor) -> "Pos":
+        return Pos.create(factor * self.row, factor * self.col)
+
+    def wrap(self, pos: "Pos") -> "Pos":
+        return Pos.create(self.row % pos.row, self.col % pos.col)
+
     def at(self, lines: List[List]):
         """
         Returns the element at this position.
