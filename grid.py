@@ -43,6 +43,18 @@ class Pos:
         for dir in dirs:
             yield self.add(dir)
 
+    def __add__(self, other):
+        return Pos.create(self.row + other.row, self.col + other.col)
+
+    def __sub__(self, other):
+        return Pos.create(self.row - other.row, self.col - other.col)
+
+    def __neg__(self):
+        return Pos.create(-self.row, -self.col)
+
+    def __mul__(self, other):
+        return Pos.create(other * self.row, other * self.col)
+
     def __lt__(self, other):
         """
         Sorts on row, then col.
