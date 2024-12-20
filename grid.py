@@ -24,6 +24,9 @@ class Pos:
     def negate(self) -> "Pos":
         return Pos.create(-self.row, -self.col)
 
+    def manhattan(self, pos: "Pos") -> int:
+        return abs(self.row - pos.row) + abs(self.col - pos.col)
+
     def multiply(self, factor) -> "Pos":
         return Pos.create(factor * self.row, factor * self.col)
 
